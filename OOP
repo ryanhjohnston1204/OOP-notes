@@ -1,0 +1,574 @@
+//These are notes for object oriented programming in C++
+//All of these notes are a quick overview of everything
+//==============================================================================
+//Classes and objects (attributes)
+#include <iostream>
+using namespace std;
+
+class myClass{//class is called myClass
+public://access specifier is public (not hidden from the user)
+  int myNum;//attribute myNum is of variable int
+  string myString;//attribute myString is of variable string
+};
+//he class keyword is used to create a class called MyClass.
+//The public keyword is an access specifier, which specifies that members
+//(attributes and methods)
+//of the class are accessible from outside the class.
+//You will learn more about access specifiers later.
+//Inside the class, there is an integer variable myNum and a string variable
+//myString.
+//When variables are declared within a class, they are called attributes.
+//At last, end the class definition with a semicolon ;.
+//==============================================================================
+//create an object
+int main()
+{
+	myClass myObj; //Create an object of myClass
+
+	//Access attributes and set values
+	myObj.myNum = 15;
+	myObj.myString = "some text";
+
+	//Print attribute values
+	cout << myObj.myNum << endl
+		<< myObj.myString << endl;
+}
+
+//MULTIPLE OBJECTS==============================================================
+#include <iostream>
+using namespace std;
+
+//Create a car class with some attributes
+class Car
+{
+public:
+	string brand;
+	string model;
+	int year;
+};
+
+//main program
+int main()
+{
+	//Create object for Car class
+	Car myObj;
+	myObj.brand = "Honda";
+	myObj.model = "Accord";
+	myObj.year = 2014;
+
+	//Create another object of Car class
+	Car myObj2;
+	myObj2.brand = "Camaro";
+	myObj2.model = "black";
+	myObj2.year = 1999;
+
+	//Create ANOTHER object of Car class
+	Car myObj3;
+	myObj3.brand = "Ford";
+	myObj3.model = "white";
+	myObj3.model = 2010;
+
+	//Print attribute values
+	cout << "First car is " << myObj.brand << endl;
+}
+
+//CLASS METHODS=================================================================
+//Class methods are functions that belong to the class
+//You can define functions that belong to a class inside or outside
+//EXAMPLE
+
+//INSIDE------------------------------------------------------------------------
+#include <iostream>
+using namespace std;
+
+class myClass//class identified as myClass
+{
+public://access specifier is public
+	void myMethod()//void function myMethod defined inside of myClass class
+	{
+		cout << "hello world" << endl;//outputs "hello world"
+	}
+};
+
+int main()//main program
+{
+	myClass myObj;//object of myClass has been created
+	myObj.myMethod();//myMethod void function has been called through object myObj
+
+	return 0;
+}
+
+//OUTSIDE-----------------------------------------------------------------------
+#include <iostream>
+using namespace std;
+
+class myClass
+{
+public:
+	void myMethod();//void function myMethod declared but NOT defined
+};
+
+
+void myClass::myMethod()//void function myMethod defined outside of class
+{
+	cout << "Hello, World!" << endl;
+}
+
+int main()
+{
+	myClass myObj;//Object created of myClass
+	myObj.myMethod();//function (method) myMethod is called
+
+}
+
+//PARAMETERS--------------------------------------------------------------------
+#include <iostream>
+using namespace std;
+
+class myClass
+{
+public:
+	void myMethod();//void function myMethod declared but NOT defined
+};
+
+
+void myClass::myMethod()//void function myMethod defined outside of class
+{
+	cout << "Hello, World!" << endl;
+}
+
+int main()
+{
+	myClass myObj;//Object created of myClass
+	myObj.myMethod();//function (method) myMethod is called
+
+}
+
+//CONSTRUCTORS==================================================================
+//A constructor in C++ is a special method that is automatically called when an
+//object of a class is created.
+
+//Constructors
+#include <iostream>
+using namespace std;
+
+class myClass
+{
+public:
+	myClass()
+	{
+		cout << "Hello, World!" << endl;
+	}
+};
+
+int main()
+{
+	myClass object;
+	return 0;
+}
+
+//CONSTRUCTOR PARAMETERS--------------------------------------------------------
+//Constructor Parameters
+#include <iostream>
+using namespace std;
+
+class Car
+{
+public:
+	string brand;
+	string model;
+	int year;
+	Car(string x, string y, int z)
+	{
+		brand = x;
+		model = y;
+		year = z;
+	}
+};
+
+int main()
+{
+	Car carObj1("Honda", "Accord", 2014);
+	Car carObj2("Ford", "F150", 2020);
+
+	cout << carObj1.brand << " is also an " << carObj1.model << carObj1.year
+  << endl;
+	cout << "My " << carObj2.brand << " is ALSO an " << carObj2.model <<
+  carObj2.year << endl;
+
+
+	return 0;
+}
+
+//ACESS SPECIFIERS==============================================================
+//Access Specifiers
+//public and private
+//Public keyword is an access specifier
+//They define how the members (attributes & methods) of a class
+//can be accessed
+//There are three types
+//public - members are accessible from outside the class
+//private - members cannot be accessed (or viewed) from outside the class
+//protected - members cannot be accessed from outside the class,
+//however, they can be accessed in inheritee classes. You will learn
+//more about Inheritance later
+
+class Class
+{
+public://Public access specifier
+	int x;//Public attribute
+private://Private access specifier
+	int y;//Private attribute
+};
+
+int main()
+{
+	Class obj;
+	obj.x = 5;//Allowed (public)
+	obj.y = 6;//Not allowed (private)
+	return 0;
+}
+
+//ENCAPSULATION=================================================================
+/*
+The meaning of Encapsulation, is to make sure that "sensitive" data is hidden
+fromusers. To achieve this, you must declare class variables/attributes as
+private
+(cannot be accessed from outside the class). If you want others to read or
+modify the value
+of a private member, you can provide public *get* and *set* methods
+*/
+#include <iostream>
+using namespace std;
+
+class Employee
+{
+private:
+	//Private attribute
+	int salary;
+public:
+	// Setter
+	void setSalary(int s)
+	{
+		salary = s;
+	}
+	// Getter
+	int getSalary()
+	{
+		return salary;
+	}
+};
+
+int main()
+{
+	Employee obj;
+	obj.setSalary(100);
+	cout << obj.getSalary();
+	return 0;
+}
+
+//INHERITANCE===================================================================
+//Inheritance
+/*
+In C++, it is possible to inherit attributes and methods
+from one class to another. We group the "inheritance concept"
+into two categories
+
+derived class (child) - the class that inherits form another class
+base class (parent) - the class being inherited from
+
+To inherit from a class, use the : symbol.
+
+In the example below, the Car class (child) inherits the attributes
+and methods from the Vehicle class (parent):
+
+*/
+#include <iostream>
+using namespace std;
+
+
+// Base class
+class Vehicle
+{
+public:
+	string brand = "Ford";
+	void honk()
+	{
+		cout << "honk" << endl;
+	}
+};
+
+//Derived class
+class Car : public Vehicle
+{
+public:
+	string model = "Mustang";
+};
+
+int main()
+{
+	Car myCar;
+	myCar.honk();
+	cout << myCar.brand + " " + myCar.model;
+	return 0;
+}
+
+//When to use "Inheritance"?
+/*
+It is useful for code reusability: reuse attributes and methods
+of an existing class when you create a new class
+*/
+
+//MULTILEVEL INHERITANCE--------------------------------------------------------
+/*
+A class can also be derived from one class,
+which is already derived from another class
+*/
+#include <iostream>
+using namespace std;
+
+// Base class (parent)
+class parent
+{
+public:
+	void myFunction()
+	{
+		cout << "Some content in parent class";
+	}
+};
+
+// Derived class (child)
+class child : public parent
+{
+
+};
+
+// Derived class (grandchild)
+class grandChild : public child
+{
+
+};
+
+int main()
+{
+	grandChild object;
+	object.myFunction();
+	return 0;
+}
+
+//MULTIPLE INHERITANCE----------------------------------------------------------
+//Multiple Inheritance
+/*
+A class can also be derived from more than one base class,
+using a comma-separated list:
+*/
+#include <iostream>
+using namespace std;
+
+// Base class
+class parent
+{
+public:
+	void function()
+	{
+		cout << "Some content in parent class";
+	}
+};
+
+// Another base class
+class parentTwo
+{
+public:
+	void functionTwo()
+	{
+		cout << "Some OTHER content in second parent class";
+	}
+};
+
+class child : public parent, public parentTwo
+{
+	// No code goes here
+};
+
+int main()
+{
+	child object;
+	object.function();
+	object.functionTwo();
+	return 0;
+}
+
+//INHERITANCE ACCESS============================================================
+/*
+You learned from the Access Specifiers chapter that there
+are three specifiers available in C++. Until now, we have
+only used public (members of a class accessible from outside
+the class) and private (members can only be accessed from
+within the class). The third specifier, protected, is
+similar to private, but it can also be accessed
+in the inherited class:
+*/
+#include <iostream>
+using namespace std;
+
+
+// Base class
+class Employee {
+protected: // Protected access specifier
+    int salary;
+};
+
+// Derived class
+class Programmer : public Employee {
+public:
+    int bonus;
+    void setSalary(int s) {
+        salary = s;
+    }
+    int getSalary() {
+        return salary;
+    }
+};
+
+int main() {
+    Programmer myObj;
+    myObj.setSalary(50000);
+    myObj.bonus = 15000;
+    cout << "Salary: " << myObj.getSalary() << "\n";
+    cout << "Bonus: " << myObj.bonus << "\n";
+    return 0;
+}
+
+//POLYMORPHISM==================================================================
+/*
+Polymorphism means "many forms", and it occurs when we have many classes that
+are related to each other by inheritance.
+
+Like we specified in the previous chapter;
+Inheritance lets us inherit attributes and methods from another class.
+Polymorphism uses those methods to perform different tasks.
+This allows us to perform a single action in different ways.
+For example, think of a base class called Animal that has a method called
+animalSound().
+Derived classes of Animals could be Pigs, Cats, Dogs, Birds -
+And they also have their own implementation of an animal sound
+(the pig oinks, and the cat meows, etc.):
+
+
+*/
+#include <iostream>
+using namespace std;
+
+
+// Base class
+class Animal {
+public:
+    void animalSound() {
+        cout << "The animal makes a sound \n";
+    }
+};
+
+// Derived class
+class Pig : public Animal {
+public:
+    void animalSound() {
+        cout << "The pig says: wee wee \n";
+    }
+};
+
+// Derived class
+class Dog : public Animal {
+public:
+    void animalSound() {
+        cout << "The dog says: bow wow \n";
+    }
+};
+
+//Now we can create Pig and Dog objects and override the
+//animalSound() method:
+// Base class
+class Animal {
+public:
+    void animalSound() {
+        cout << "The animal makes a sound \n";
+    }
+};
+
+// Derived class
+class Pig : public Animal {
+public:
+    void animalSound() {
+        cout << "The pig says: wee wee \n";
+    }
+};
+
+// Derived class
+class Dog : public Animal {
+public:
+    void animalSound() {
+        cout << "The dog says: bow wow \n";
+    }
+};
+
+int main() {
+    Animal myAnimal;
+    Pig myPig;
+    Dog myDog;
+
+    myAnimal.animalSound();
+    myPig.animalSound();
+    myDog.animalSound();
+    return 0;
+}
+
+//Why and When to use "Inheritance" and "Polymorphism"?
+/*
+It is useful for code reusability: reuse attributes and methods of
+an exiting class when you create a new class.
+*/
+
+//C++ FILES=====================================================================
+/*
+The fstream library allows us to work with files
+To use the fstream library, include both the standard
+<iostream> AND the <fstream> header file:
+
+*/
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+//Remember ofstream and ifstream
+
+//Example
+int main()
+{
+	// Create and open a text file
+	ofstream myFile("filename.txt");
+
+	// Write to the file
+	myFile << "Files can be tricky, but it fun enough!";
+
+	//Close the file
+	myFile.close();
+}
+
+//READ A FILE-------------------------------------------------------------------
+
+//Create a text string, which is used to output the text file
+string myText;
+
+//Read from the text file
+ifstream myReadFile("filename.txt");
+
+// Use a while loop together with the getline() function to
+//read the file line by line
+while (getline(myReadFile, myText))
+{
+	// Output the text from the file
+	cout << myText;
+}
+
+// Close the file
+myReadFile.close();
